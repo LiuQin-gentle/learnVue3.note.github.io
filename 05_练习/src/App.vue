@@ -1,8 +1,23 @@
 <script setup>
-    import { ref } from 'vue';
+    import { reactive, ref } from 'vue';
+    import TabItem from './components/TabItem.vue';
 
     //创建一个变量来记录选项卡的状态
     const current = ref(0);//0表示球员，1表示球队
+
+    const player = reactive({
+        name:"梅西",
+        img:"/images/messi.png",
+        rate:1,
+        hot:"433760"
+    });
+
+    const team = reactive({
+        name:"法国",
+        img:"/images/法国.jpg",
+        rate:1,
+        hot:"333760"
+    });
 </script>
 <template>
     <!-- 选项卡的外部容器 -->
@@ -20,39 +35,13 @@
         <div v-show = "current === 0">
             <!-- 球员 -->
             <div class="tab-list">
-                <div class="tab-item">
-                    <!-- 图片 -->
-                    <div class="photo">
-                        <img src="/images/messi.png" alt="梅西">
-                        <span>1</span>
-                    </div>
-                    <!-- 描述 -->
-                    <div class="desc">
-                        <span class="name">梅西</span>
-                        <div class="hot-bar">
-                            <div class="inner">433760热度</div>
-                        </div>
-                    </div>
-                </div>
+                <TabItem :item="player"></TabItem>
             </div>
         </div>
         <div v-show = "current === 1">
             <!-- 球队 -->
             <div class="tab-list">
-                <div class="tab-item">
-                    <!-- 图片 -->
-                    <div class="photo">
-                        <img src="/images/法国.jpg" alt="法国">
-                        <span>1</span>
-                    </div>
-                    <!-- 描述 -->
-                    <div class="desc">
-                        <span class="name">法国</span>
-                        <div class="hot-bar">
-                            <div class="inner">333760热度</div>
-                        </div>
-                    </div>
-                </div>
+                <TabItem :item="team"></TabItem>
             </div>
         </div>
     </div>
@@ -75,63 +64,7 @@
         margin: 20px;
     }
 
-    .tab-item{
-        display: flex;
-    }
-
-    .photo{
-        width: 150px;
-        background-color: #fff;
-        border-radius: 20px;
-        overflow: hidden;
-        position: relative;
-    }
-    .photo img{
-        width: 100%;
-        vertical-align: bottom;
-    }
-    .photo span{
-        background-color: rgb(243, 102, 0);
-        color: #fff;
-        font-size: 25px;
-        position: absolute;
-        top:0;
-        left: 0;
-        display: inline-block;
-        width: 40px;
-        height: 40px;
-        border-radius: 10px 0 10px 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: bold;
-    }
-
-    .desc{
-        display: flex;
-        flex-flow: column;
-        justify-content: space-evenly;
-        color: #fff;
-        font-size: 30px;
-        flex: auto;
-        margin-left: 30px;
-    }
-
-    .hot-bar{
-        background-color: rgba(3, 38, 103);
-        border-radius: 50px;
-        text-indent: .5em;
-    }
-    .inner{ 
-        background-image: linear-gradient(
-            to right, 
-            rgba(187, 3, 52) 50%,
-            rgba(66, 2, 12));
-        border-radius: 50px;
-        width: 10%;
-        white-space: nowrap;
-    }
-
+    
     .tab-button{
         background-color: #fff;
         font-size: 30px;
