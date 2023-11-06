@@ -11,5 +11,7 @@
    -->
     <button @click="isShow=!isShow">切换</button>
     <component :is="isShow ? A : B"></component>
+    <!-- is是div，标签就是div；is是p，标签就是p -->
+    <component is="div">我是component</component>
 </template>
 
