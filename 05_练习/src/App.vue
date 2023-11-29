@@ -1,23 +1,69 @@
 <script setup>
-    import { reactive, ref } from 'vue';
-    import TabItem from './components/TabItem.vue';
+import { reactive, ref } from 'vue';
+import TabItem from './components/TabItem.vue';
 
-    //创建一个变量来记录选项卡的状态
-    const current = ref(0);//0表示球员，1表示球队
+//创建一个变量来记录选项卡的状态
+const current = ref(0);//0表示球员，1表示球队
 
-    const player = reactive({
+const player = reactive({
+    name:"梅西",
+    img:"/images/messi.png",
+    rate:1,
+    hot:"433760"
+});
+
+const team = reactive({
+    name:"法国",
+    img:"/images/法国.jpg",
+    rate:1,
+    hot:"333760"
+});
+
+const players = reactive([
+    {
         name:"梅西",
         img:"/images/messi.png",
         rate:1,
         hot:"433760"
-    });
+    },
+    {
+        name:"C罗",
+        img:"/images/ronaldo.png",
+        rate:2,
+        hot:"333760"
+    },
+    {
+        name:"内马尔",
+        img:"/images/neymar.png",
+        rate:3,
+        hot:"233760"
+    }
+]);
 
-    const team = reactive({
+const teams = reactive([
+    {
         name:"法国",
         img:"/images/法国.jpg",
         rate:1,
         hot:"333760"
-    });
+    },
+    {
+        name:"巴西",
+        img:"/images/巴西.jpg",
+        rate:2,
+        hot:"233760"
+    },
+    {
+        name:"荷兰",
+        img:"/images/荷兰.jpg",
+        rate:3,
+        hot:"133760"
+    }
+]);
+
+const playerMaxHot = players[0].hot;
+const teamMaxHot = teams[0].hot;
+
 </script>
 <template>
     <!-- 选项卡的外部容器 -->
@@ -35,13 +81,21 @@
         <div v-show = "current === 0">
             <!-- 球员 -->
             <div class="tab-list">
-                <TabItem :item="player"></TabItem>
+                <TabItem 
+                    v-for="player in players"
+                    :item="player"
+                    :max-hot="playerMaxHot">
+                </TabItem>
             </div>
         </div>
         <div v-show = "current === 1">
             <!-- 球队 -->
             <div class="tab-list">
-                <TabItem :item="team"></TabItem>
+                <TabItem 
+                    v-for="team in teams"
+                    :item="team"
+                    :max-hot="teamMaxHot">
+                </TabItem>
             </div>
         </div>
     </div>
@@ -63,7 +117,6 @@
     .tab-list{
         margin: 20px;
     }
-
     
     .tab-button{
         background-color: #fff;
