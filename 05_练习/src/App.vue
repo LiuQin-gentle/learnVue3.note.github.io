@@ -1,23 +1,7 @@
 <script setup>
 import { reactive, ref } from 'vue';
-import TabItem from './components/TabItem.vue';
-
-//创建一个变量来记录选项卡的状态
-const current = ref(0);//0表示球员，1表示球队
-
-const player = reactive({
-    name:"梅西",
-    img:"/images/messi.png",
-    rate:1,
-    hot:"433760"
-});
-
-const team = reactive({
-    name:"法国",
-    img:"/images/法国.jpg",
-    rate:1,
-    hot:"333760"
-});
+import TabList from './components/TabList.vue';
+import Tab from './components/Tab.vue';
 
 const players = reactive([
     {
@@ -66,74 +50,15 @@ const teamMaxHot = teams[0].hot;
 
 </script>
 <template>
-    <!-- 选项卡的外部容器 -->
-  <div class="tab-wrapper">
-    <!-- 选项卡的头部 -->
-    <header class="tab-head">
-        <!-- 定义两个按钮 -->
-        <div @click="current = 0" class="tab-button" :class="{active:current === 0}">热门球员</div>
-        <div @click="current = 1" class="tab-button" :class="{active:current === 1}">热门球队</div>
-    </header>
-    <!-- 选项卡的主体 -->
-    <div class="main">
-        <!-- v-show 用来设置一个内容是否显示 -->
-        <!-- v-show是通过css的style属性来实现隐藏的 -->
-        <div v-show = "current === 0">
-            <!-- 球员 -->
-            <div class="tab-list">
-                <TabItem 
-                    v-for="player in players"
-                    :item="player"
-                    :max-hot="playerMaxHot">
-                </TabItem>
-            </div>
-        </div>
-        <div v-show = "current === 1">
-            <!-- 球队 -->
-            <div class="tab-list">
-                <TabItem 
-                    v-for="team in teams"
-                    :item="team"
-                    :max-hot="teamMaxHot">
-                </TabItem>
-            </div>
-        </div>
-    </div>
-  </div>
+    <Tab>
+        <template #0>
+            <TabList :items = "players" :maxHot = "playerMaxHot"></TabList>
+        </template>
+        <template #1>
+            <TabList :items = "teams" :maxHot = "teamMaxHot"></TabList>
+        </template>
+    </Tab>
 </template>
 <style scoped>
-    .tab-wrapper{
-        box-sizing: border-box;
-        width: 800px;
-        padding: 20px;
-        background-color: rgb(45, 83, 211);
-    }
-    .tab-head{
-        display: flex;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-
-    .tab-list{
-        margin: 20px;
-    }
     
-    .tab-button{
-        background-color: #fff;
-        font-size: 30px;
-        padding: 10px 0;
-        text-align: center;
-        flex: auto;
-        cursor: pointer;
-        transition: 0.5s;
-    }
-
-    .tab-button:not(.active):hover{
-        color: rgb(187, 3, 52);
-    }
-
-    .active{
-        background-color: rgb(187, 3, 52);
-        color: #fff;
-    }
 </style>

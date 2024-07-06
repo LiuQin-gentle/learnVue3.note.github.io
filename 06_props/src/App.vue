@@ -1,11 +1,11 @@
 <script setup>
-import {ref} from 'vue';
-const arr = ref(["孙悟空", "猪八戒", "沙和尚", "唐僧"]);
+import C from "./components/C.vue"
 </script>
 
 <template>
-  <ul>
-    <li v-for="name in arr">{{name}}</li>
-  </ul>
+  <C class="box2" style="color: red;"></C>
 </template>
 
+<style scoped>
+
+</style>
