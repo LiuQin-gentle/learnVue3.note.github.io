@@ -1,15 +1,22 @@
 <script setup>
 import MealItem from "./MealItem.vue"
 import {useMealsStore} from "../../store/meals"
-//加载store中的属性
-const meals = useMealsStore();
+
+//加载store中的数据
+const props = defineProps(["meals"]);
 </script>
 <template>
     <!-- 所有的汉堡的容器 -->
     <div class="meals">
         <!-- 显示商品信息 -->
-        <MealItem v-for="item in meals.filterMeals" :meal = item></MealItem>
-        <h2 v-if="meals.filterMeals.length == 0">没有找到指定的商品</h2>
+        <MealItem 
+            :desc="$attrs.desc" 
+            v-for="item in props.meals" 
+            :meal = item>
+        </MealItem>
+        <h2 v-if="!props.meals || props.meals.length == 0">
+            没有找到指定的商品
+        </h2>
     </div>
 </template>
 <style scoped>
