@@ -13,8 +13,7 @@ const meals = useMealsStore();
 </template>
 <style scoped>
 .meals{
-    height: 100vh;
-    padding: 120rem 0;
+    height: calc(100vh - 120rem);
     overflow: auto;
 }
 </style>
