@@ -1,8 +1,16 @@
+<script setup>
+import { useMealsStore } from "@/store/meals";
+const meals = useMealsStore();
+</script>
+
 <template>
     <div class="filter">
         <div class="filter-inner">
             <i class="ri-search-line"></i>
-            <input class="fliter-input" placeholder="请输入关键字">
+            <input 
+            class="fliter-input" 
+            placeholder="请输入关键字"
+            v-model="meals.keyword">
         </div> 
     </div>
 </template>

@@ -1,4 +1,5 @@
 <script setup>
+import { storeToRefs } from 'pinia';
 import {defineProps} from 'vue';
 import Counter from '../UI/Counter.vue';
 const props = defineProps(["meal"]);
@@ -8,17 +9,17 @@ const meal = props.meal;
 <template>
     <div class="meal">
         <div class="img">
-            <img :src= meal.img :alt=meal.title>
+            <img :src= props.meal.img :alt= props.meal.title>
         </div>
 
         <div class="info">
             <div class="desc">
-                <h2>{{ meal.title }}</h2>
-                <p>{{ meal.desc }}</p>
+                <h2>{{ props.meal.title }}</h2>
+                <p>{{ props.meal.desc }}</p>
             </div>
 
             <div class="price-btn"> 
-                <span class="price">{{ meal.price }}</span>
+                <span class="price">{{ props.meal.price }}</span>
                 <Counter></Counter>
             </div>
         </div>
