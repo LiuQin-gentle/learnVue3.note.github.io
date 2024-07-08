@@ -1,9 +1,7 @@
 <script setup>
-import { storeToRefs } from 'pinia';
 import {defineProps} from 'vue';
 import Counter from '../UI/Counter.vue';
 const props = defineProps(["meal"]);
-const meal = props.meal;
 
 </script>
 <template>
@@ -20,7 +18,7 @@ const meal = props.meal;
 
             <div class="price-btn"> 
                 <span class="price">{{ props.meal.price }}</span>
-                <Counter></Counter>
+                <Counter :meal="props.meal"></Counter>
             </div>
         </div>
     </div>

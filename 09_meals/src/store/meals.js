@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 export const useMealsStore = defineStore("meals", {
-    state:() => ({
+    state: () => ({
         data: [
             {
                 id: "1",
@@ -55,9 +55,53 @@ export const useMealsStore = defineStore("meals", {
         ],
         keyword: ""
     }),
-    getters:{
+
+    getters: {
         filterMeals: state => {
             return state.data.filter(item => item.title.indexOf(state.keyword) !== -1);
+        },
+
+        //获取购物车中的所有商品
+        cartMeals: state => {
+            return state.data.filter((item => item.count > 0));
+        },
+
+        //获取购物车中商品的总数量
+        totalCount: state => {
+            if(state.cartMeals.length <= 0) return 0;
+
+            //购物车中有商品，计算商品的总数量
+            return state.cartMeals.reduce(
+                (result, item) => result + item.count, 
+                0
+            )
+        },
+
+        //获取购物车中商品的总价格
+        totalAmount: state => {
+            if(state.cartMeals.length <= 0) return 0;
+
+            //购物车中有商品，计算商品的总价格
+            return state.cartMeals.reduce(
+                (result, item) => result + item.count * item.price, 
+                0
+            )
+        }
+    },
+
+    actions: {
+        addMealToCart(meal) {
+            //修改购买食物的数量
+            //meal还没有添加到购物车中
+            if (isNaN(meal.count)) {
+                meal.count = 0;
+            }
+
+            meal.count++;
+        },
+
+        subMealToCart(meal){
+            meal.count--;
         }
     }
 })
