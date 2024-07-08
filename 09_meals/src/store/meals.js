@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 export const useMealsStore = defineStore("meals", {
-    state:() => {
+    state:() => ({
         data: [
             {
                 id: "1",
@@ -53,5 +53,5 @@ export const useMealsStore = defineStore("meals", {
                 img: "/images/meals/7.png"
             }
         ]
-    }
+    })
 })
