@@ -16,6 +16,7 @@ const meals = useMealsStore();
 .meals{
     height: calc(100vh - 120rem);
     overflow: auto;
+    padding-bottom: 160rem;
 }
 
 .meals h2{
