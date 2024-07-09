@@ -2,13 +2,17 @@
 import { useMealsStore } from "@/store/meals";
 import cartBag from "../../assets/bag.png";
 import CartDetails from "../Cart/CartDetails.vue";
+import Checkout from "../Checkout/Checkout.vue"
 import { ref } from "vue";
 const meals = useMealsStore();
 const showDetails = ref(false);
+const showCheckout = ref(false);
+
 </script>
 <template>
+    <Checkout @close="showCheckout=false" :isShow="showCheckout"></Checkout>
     <CartDetails 
-        :is-show="showDetails" 
+        :isShow="showDetails" 
         @hide="showDetails = false">
     </CartDetails>
 
@@ -28,8 +32,7 @@ const showDetails = ref(false);
                 {{meals.totalAmount}}
             </p>
         </div>
-
-        <button class="checkout">去结算</button>
+        <button @click="showCheckout = true" class="checkout-btn">去结算</button>
     </div>
 </template>
 <style scoped>
@@ -86,7 +89,7 @@ const showDetails = ref(false);
     font-size: 26rem;
 }
 
-.checkout{
+.checkout-btn{
     position: absolute;
     top:0;
     right:0;
