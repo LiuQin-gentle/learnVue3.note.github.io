@@ -10,7 +10,7 @@ const meals = useMealsStore();
   <div v-show="props.isShow" class="checkout">
     <div class="close">
       <i @click="$emit('close')" class="ri-close-fill"></i>
-    </div>
+    </div> 
     <div class="details">
       <div class="header">
         <p>餐品详情</p>
