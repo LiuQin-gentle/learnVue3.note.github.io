@@ -10,13 +10,14 @@ const stu = {
 <template>
     <div>
         <h1><slot name="s1"></slot></h1>
-        <div><slot 
-            name="s2" 
-            :stuName="stu.name"
-            :age="stu.age"
-            :gender="stu.gender"
-            :stu="stu"
-            >
-        </slot></div>
+        <div>
+            <slot 
+                name="s2" 
+                :stuName="stu.name"
+                :age="stu.age"
+                :gender="stu.gender"
+                :stu="stu">
+            </slot>
+        </div>
     </div>
 </template>
